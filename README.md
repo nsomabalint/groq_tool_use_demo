@@ -28,6 +28,12 @@ Assistant: The current weather in Budapest is partly cloudy with a temperature o
 
 The model first resolves the city to coordinates, then uses those coordinates to get the weather — two chained tool calls in a single conversation turn.
 
+## System prompt
+
+The system prompt is how you control the LLM's behavior. It's the first message in the conversation and the model follows it throughout the session. In the weather demo it's fairly basic, but in a real application this is where you'd encode your business logic — what the assistant should and shouldn't do, how it should respond, what tone to use, when to call which tool, etc.
+
+For example, you could tell the model to always respond in Hungarian, to refuse questions unrelated to weather, or to always include a clothing recommendation based on the temperature. None of that requires code changes — you just update the system prompt string.
+
 ## Using a Hugging Face Space as a tool
 
 Gradio apps automatically expose a REST API at `/api/predict` — you don't need to write any API code yourself. This means any Gradio app deployed on [Hugging Face Spaces](https://huggingface.co/spaces) is already a working API endpoint that an LLM can call as a tool.

@@ -63,7 +63,18 @@ tool_functions = {
 
 def run(user_message: str):
     print(f"\nUser: {user_message}")
-    messages = [{"role": "user", "content": user_message}]
+    messages = [
+        {
+            "role": "system",
+            "content": (
+                "You are a helpful weather assistant. "
+                "When the user asks about the weather in a city, "
+                "use the geocode_city tool to get coordinates first, "
+                "then use get_weather to fetch the current conditions."
+            ),
+        },
+        {"role": "user", "content": user_message},
+    ]
 
     while True:
         response = client.chat.completions.create(
